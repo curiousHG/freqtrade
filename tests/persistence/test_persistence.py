@@ -8,6 +8,7 @@ from sqlalchemy import select
 from freqtrade.constants import CUSTOM_TAG_MAX_LENGTH, DATETIME_PRINT_FORMAT
 from freqtrade.enums import TradingMode
 from freqtrade.exceptions import DependencyException
+from freqtrade.exchange.exchange_utils import TICK_SIZE
 from freqtrade.persistence import LocalTrade, Order, Trade, init_db
 from freqtrade.util import dt_now
 from tests.conftest import (
@@ -2144,7 +2145,6 @@ def test_Trade_object_idem():
         "bt_trades_open",
         "bt_trades_open_pp",
         "bt_open_open_trade_count",
-        "bt_open_open_trade_count_candle",
         "bt_total_profit",
         "from_json",
     )
@@ -2833,6 +2833,8 @@ def test_recalc_trade_from_orders_dca(data) -> None:
         is_short=False,
         leverage=1.0,
         trading_mode=TradingMode.SPOT,
+        price_precision=0.001,
+        precision_mode_price=TICK_SIZE,
     )
     Trade.session.add(trade)
 

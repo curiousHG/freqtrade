@@ -259,8 +259,8 @@ def _download_pair_history(
         logger.info(
             f'Download history data for "{pair}", {timeframe}, '
             f"{candle_type} and store in {datadir}. "
-            f'From {format_ms_time(since_ms) if since_ms else "start"} to '
-            f'{format_ms_time(until_ms) if until_ms else "now"}'
+            f"From {format_ms_time(since_ms) if since_ms else 'start'} to "
+            f"{format_ms_time(until_ms) if until_ms else 'now'}"
         )
 
         logger.debug(
@@ -679,11 +679,17 @@ def download_data(
                 )
         else:
             if not exchange.get_option("ohlcv_has_history", True):
-                raise OperationalException(
-                    f"Historic klines not available for {exchange.name}. "
-                    "Please use `--dl-trades` instead for this exchange "
-                    "(will unfortunately take a long time)."
-                )
+                if not exchange.get_option("trades_has_history", True):
+                    raise OperationalException(
+                        f"Historic data not available for {exchange.name}. "
+                        f"{exchange.name} does not support downloading trades or ohlcv data."
+                    )
+                else:
+                    raise OperationalException(
+                        f"Historic klines not available for {exchange.name}. "
+                        "Please use `--dl-trades` instead for this exchange "
+                        "(will unfortunately take a long time)."
+                    )
             migrate_data(config, exchange)
             pairs_not_available = refresh_backtest_ohlcv_data(
                 exchange,
