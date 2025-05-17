@@ -2,6 +2,7 @@
 
 <!-- code block -->
 ### Edge Positioning
+
 ```bash
 freqtrade edge \
 --strategy-path user_data/strategies/berlinguyinca \
@@ -10,6 +11,7 @@ freqtrade edge \
 ```
 
 ### Download Data
+
 ```bash
 freqtrade download-data \
 --timeframe 5m \
@@ -19,12 +21,14 @@ freqtrade download-data \
 ```
 
 ### Backtest
+
 ```bash
 freqtrade backtesting \
 --strategy-path user_data/strategies/mystrategies \
 -c user_data/configs/basic-config.json \
 --strategy MultiIndicatorStrategy
 ```
+
 ```bash
 freqtrade plot-profit  \
 -p LTC/BTC \
@@ -40,18 +44,24 @@ freqtrade backtesting \
 ```
 
 ### test pairlist
+
 ```bash
 freqtrade test-pairlist \
 -c user_data/configs/basic-config.json \
 -c user_data/configs/config_freqai.json
 ```
 
-
+```bash
 freqtrade backtesting \
 --strategy-path user_data/strategies/ \
 -c user_data/configs/basic-config.json \
 --strategy GodStra
+```
 
+### List-pairs
+freqtrade list-pairs --exchange binance --trading-mode futures
+freqtrade list-exchanges  
+freqtrade list-strategies --recursive-strategy-search
 
 freqtrade download-data --days 100 --timeframe 12h
 
@@ -63,10 +73,11 @@ freqtrade backtesting \
 freqtrade backtesting \
 --strategy FreqaiExampleStrategy \
 --strategy-path freqtrade/templates \
---config user_data/config_freqai.json \
+--config user_data/configs/config_freqai.json \
+--config user_data/configs/short-config.json \
 --freqaimodel LightGBMRegressor \
---timerange 20210501-20210701
-
+--timerange 20241001-20241231 \
+--timeframe 5m
 
 freqtrade test-pairlist
 
@@ -74,7 +85,6 @@ freqtrade trade \
 --config user_data/configs/config_freqai.json \
 --strategy FreqaiExampleStrategy \
 --freqaimodel LightGBMRegressor
-
 
 freqtrade trade \
 --strategy-path user_data/strategies/berlinguyinca \
@@ -126,7 +136,6 @@ freqtrade hyperopt \
 --eps \
 --timerange 20230601-
 
-
 freqtrade trade \
 --config user_data/configs/config_freqai-trade.json \
 --strategy FreqaiExampleStrategy \
@@ -172,7 +181,6 @@ freqtrade trade -c user_data/configs/basic-config.json \
 --strategy BinHV27 \
 --db-url sqlite:///user_data/trades/BinHV27-tradesv3.dryrun.sqlite
 
-
 freqtrade trade -c user_data/configs/basic-config.json \
 -c user_data/configs/config_scalp.json \
 --strategy-path user_data/strategies/berlinguyinca \
@@ -214,7 +222,6 @@ ADXMomentum ASDTSRockwellTrading AdxSmas AverageStrategy AwesomeMacd BbandRsi Bi
 ClucMay72018 CofiBitStrategy CombinedBinHAndCluc DoesNothingStrategy EMASkipPump Freqtrade_backtest_validation_freqtrade1
 Low_BB MACDStrategy MACDStrategy_crossed MultiRSI Quickie ReinforcedAverageStrategy ReinforcedQuickie ReinforcedSmoothScalp
 Scalp Simple SmoothOperator SmoothScalp TDSequentialStrategy TechnicalExampleStrategy
-
 
 AwesomeStrategy GodStra Strategy002 Bandtastic Heracles Strategy003 BreakEven HourBasedStrategy Strategy004 CustomStoplossWithPSAR
 InformativeSample Strategy005 hlhb Diamond  MultiMa  Supertrend FixedRiskRewardLoss PatternRecognition SwingHighToSky mabStra
