@@ -79,7 +79,36 @@ freqtrade backtesting \
 --timerange 20241001-20241231 \
 --timeframe 5m
 
+
+
 freqtrade test-pairlist
+
+freqtrade backtesting \
+--config user_data/configs/donchian-config.json \
+--strategy-path user_data/strategies/mystrategies \
+--strategy DonchianBreakout \
+--timeframe 5m \
+
+
+freqtrade hyperopt \
+--hyperopt-loss MultiMetricHyperOptLoss \
+--config user_data/configs/donchian-config.json \
+--strategy-path user_data/strategies/mystrategies \
+--strategy DonchianBreakout \
+-e 500 \
+--spaces all
+
+
+freqtrade trade \
+--config user_data/configs/donchian-config.json \
+--strategy-path user_data/strategies/mystrategies \
+--strategy DonchianBreakout \
+--db-url sqlite:///user_data/trades/Donchian-tradesv3.dryrun.sqlite
+
+freqtrade test-pairlist \
+--config user_data/configs/donchian-config.json
+
+
 
 freqtrade trade \
 --config user_data/configs/config_freqai.json \
